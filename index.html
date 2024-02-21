@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Sinh viên</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            width: 16.67%; /* Đặt độ rộng cho mỗi cột là 16.67% để chúng đều */
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Quản lý Sinh viên</h2>
+
+<form id="studentForm">
+    <label for="studentID">Mã SV:</label>
+    <input type="text" id="studentID" required><br>
+
+    <label for="fullName">Họ và tên:</label>
+    <input type="text" id="fullName" required><br>
+
+    <label for="dob">Ngày tháng năm sinh:</label>
+    <input type="date" id="dob" required><br>
+
+    <label for="className">Lớp học:</label>
+    <input type="text" id="className" required><br>
+
+    <label for="gpa">Điểm GPA:</label>
+    <input type="number" id="gpa" step="0.01" required><br>
+
+    <button type="button" onclick="addStudent()">Thêm Sinh viên</button>
+</form>
+
+<table id="studentTable">
+    <tr>
+        <th>Mã SV</th>
+        <th>Họ và tên</th>
+        <th>Ngày sinh</th>
+        <th>Lớp học</th>
+        <th>Điểm GPA</th>
+        <th>Chỉnh sửa</th>
+    </tr>
+</table>
+
+<script>
+    function addStudent() {
+        var studentID = document.getElementById("studentID").value;
+        var fullName = document.getElementById("fullName").value;
+        var dob = document.getElementById("dob").value;
+        var className = document.getElementById("className").value;
+        var gpa = document.getElementById("gpa").value;
+
+        var table = document.getElementById("studentTable");
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+
+        cell1.innerHTML = studentID;
+        cell2.innerHTML = fullName;
+        cell3.innerHTML = dob;
+        cell4.innerHTML = className;
+        cell5.innerHTML = gpa;
+        cell6.innerHTML = '<button onclick="editStudent(this)">Xóa</button>';
+    }
+
+    function editStudent(button) {
+        var row = button.parentNode.parentNode;
+        document.getElementById("studentID").value = row.cells[0].innerHTML;
+        document.getElementById("fullName").value = row.cells[1].innerHTML;
+        document.getElementById("dob").value = row.cells[2].innerHTML;
+        document.getElementById("className").value = row.cells[3].innerHTML;
+        document.getElementById("gpa").value = row.cells[4].innerHTML;
+
+        row.remove();
+    }
+</script>
+
+</body>
+</html>
